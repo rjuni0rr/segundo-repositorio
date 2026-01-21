@@ -21,7 +21,8 @@ class User extends Authenticatable
         'birth_date',
         'cpf',
         'address',
-        'status'
+        'status',
+        'category_id',
     ];
 
 
@@ -70,5 +71,10 @@ class User extends Authenticatable
     protected $casts = [
         'last_login' => 'datetime',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
 }

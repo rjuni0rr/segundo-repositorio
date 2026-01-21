@@ -25,6 +25,9 @@ class CreateUserRequest extends FormRequest
             'phone'  => 'required',
             'status' => 'required|boolean',
             'password' => 'required|min:6',
+            'category_id' => 'required|exists:categories,id',
+            'birth_date' => 'required',
+            'address' => 'required',
         ];
     }
 
@@ -58,6 +61,12 @@ class CreateUserRequest extends FormRequest
             // Senha
             'password.required' => 'A senha é obrigatória.',
             'password.min'      => 'A senha deve ter no mínimo 6 caracteres.',
+
+            'category_id.required' => 'A categoria é obrigatória.',
+
+            // Resto faltando(incompleto)
+            'birth_date.required' => 'A data de nascimento é obrigatória.',
+            'address.required' => 'O Endereço é obrigatório.',
         ];
     }
 }

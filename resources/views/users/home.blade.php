@@ -102,7 +102,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Email</th>
-                            <th>Telefone</th>
+                            <th>Função</th>
                             <th>Último acesso</th>
                             <th>Status</th>
                             <th>Ações</th>
@@ -114,7 +114,7 @@
                         <tr>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->phone_formatted ?? '-' }}</td>
+                            <td>{{ $user->category->name ?? '-' }}</td>
                             <td>{{ formatLastLogin($user->last_login) }}</td>
                             <td>
                                 @if ($user->status)

@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Category;
+
 use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
@@ -57,25 +62,23 @@ class UserController extends Controller
 
     public function createUser()
     {
-        return view('users.create');
+        $categories = Category::orderBy('name')->get();
+
+        return view('users.create', compact('categories'));
     }
 
     public function createUserSubmit(CreateUserRequest $request)
     {
-        $user = User::create([
-            'name'   => $request->name,
-            'email'  => $request->email,
-            'cpf'    => preg_replace('/\D/', '', $request->cpf),
-            'phone'  => preg_replace('/\D/', '', $request->phone),
-            'status' => $request->status,
-            'password' => bcrypt($request->password),
-            'address' => $request->address,
-            'birth_date' => $request->birth_date,
-        ]);
+        $data = $request->validated();
 
-        $user->save();
+        $data['cpf'] = preg_replace('/\D/', '', $data['cpf']);
+        $data['phone'] = preg_replace('/\D/', '', $data['phone']);
 
-        return redirect()->route('home');
+        User::create($data);
+
+        return redirect()
+            ->route('home')
+            ->with('success', 'Usuário cadastrado com sucesso.');
     }
 
     public function show(string $id)
@@ -101,7 +104,9 @@ class UserController extends Controller
 
     public function editUser(User $user)
     {
-        return view('users.edit', compact('user'));
+        $categories = Category::orderBy('name')->get();
+
+        return view('users.edit', compact('user', 'categories'));
     }
 
     public function editUserSubmit(UpdateUserRequest $request, User $user)
