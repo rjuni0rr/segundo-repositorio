@@ -9,7 +9,6 @@
     ])
 
     <div class="container-fluid mt-4">
-
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4>Gestão de usuários</h4>
             <a href="{{ route('user.create') }}" class="btn btn-dark btn-sm">+ Novo usuário</a>
@@ -58,7 +57,7 @@
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Telefone</th>
-                            <th>Data de cadastro</th>
+                            <th>Último acesso</th>
                             <th>Status</th>
                             <th>Ações</th>
                         </tr>
@@ -70,7 +69,7 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone_formatted ?? '-' }}</td>
-                            <td>{{ $user->created_at->format('d/m/Y') }}</td>
+                            <td>{{ formatLastLogin($user->last_login) }}</td>
                             <td>
                                 @if ($user->status)
                                     <span class="badge bg-success">Ativo</span>
