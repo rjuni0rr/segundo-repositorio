@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
@@ -14,17 +15,44 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class UserController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $users = User::query()
 
-        $data = [
-            'total_users' => $users->count(),
-            'total_users_day' => User::whereDate('created_at', now())->count(),
-            'total_users_month' => User::whereMonth('created_at', now()->month)->count(),
-        ];
+            ->when($request->filled('name'), function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->name . '%');
+            })
 
-        return view('users.home', compact('users', 'data'));
+            ->when($request->filled('cpf'), function ($query) use ($request) {
+                $cpf = preg_replace('/\D/', '', $request->cpf);
+                $query->where('cpf', 'like', '%' . $cpf . '%');
+            })
+
+            ->when($request->filled('email'), function ($query) use ($request) {
+                $query->where('email', 'like', '%' . $request->email . '%');
+            })
+
+            ->when($request->filled('status'), function ($query) use ($request) {
+                $query->where('status', $request->status);
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString(); // mantem os filtros na paginação(atenção: vai retornar um paginator)
+
+
+        // retorna globalmente (e cada um individual)
+        $totalUsers = User::count();
+        $todayUsers = User::whereDate('created_at', Carbon::today())->count();
+        $monthUsers = User::whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->count();
+
+        return view('users.home', compact(
+            'users',
+            'totalUsers',
+            'todayUsers',
+            'monthUsers'
+        ));
     }
 
     public function createUser()
