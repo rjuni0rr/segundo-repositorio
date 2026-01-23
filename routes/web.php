@@ -3,10 +3,25 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MainController;
 
-// Já com Rate Limit
-Route::middleware('throttle:general')->group(function () {
 
+// guest routes
+Route::middleware(['guest'])->group(function (){
+
+    // authentication (login)
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login-submit', [AuthController::class, 'loginSubmit'])->name('login.submit');
+
+});
+
+
+
+// auth routes
+Route::middleware(['auth'])->group(function () {
+
+    // Homepage
     Route::get('/', [UserController::class, 'index'])->name('home');
 
     // Create user
@@ -25,6 +40,9 @@ Route::middleware('throttle:general')->group(function () {
 
     // PDF
     Route::get('/users/export/pdf', [UserController::class, 'exportPdf'])->middleware('throttle:export')->name('users.export.pdf');
+
+    // Logout
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
 

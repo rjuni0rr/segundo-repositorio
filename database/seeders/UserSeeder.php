@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
             'phone' => '11912345678',
             'cpf' => '12345678901',
             'status' => true,
-            'password' => Hash::make('123456'),
+            'password' => Hash::make('Aa123456'),
         ]);
 
         User::create([
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'phone' => '11987654321',
             'cpf' => '98765432100',
             'status' => false,
-            'password' => Hash::make('123456'),
+            'password' => Hash::make('Aa123456'),
         ]);
     }
 }

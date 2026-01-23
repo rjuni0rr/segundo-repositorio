@@ -58,6 +58,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4>Gestão de usuários</h4>
             <a href="{{ route('user.create') }}" class="btn btn-dark btn-sm">+ Novo usuário</a>
+            <a href="{{ route('logout') }}" class="btn btn-secondary btn-sm">Sair</a>
         </div>
 
         <div class="row g-3 mb-4">

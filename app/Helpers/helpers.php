@@ -1,5 +1,15 @@
 <?php
 
+if(!function_exists('showServerError')){
+    function showServerError()
+    {
+        if(session()->has('server_error')){
+            return '<div class="text-sm italic text-red-500">' . session()->get('server_error') . '</div>';
+        } else {
+            return '';
+        }
+    }
+}
 function formatCpf($cpf)
 {
     return preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $cpf);
