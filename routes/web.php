@@ -2,13 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\MainController;
 
+
+use Maatwebsite\Excel\Facades\Excel;
 
 // guest routes
-Route::middleware(['guest'])->group(function (){
+Route::middleware(['guest', 'throttle:login'])->group(function (){
 
     // authentication (login)
     Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -16,10 +16,8 @@ Route::middleware(['guest'])->group(function (){
 
 });
 
-
-
 // auth routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'throttle:general'])->group(function () {
 
     // Homepage
     Route::get('/', [UserController::class, 'index'])->name('home');
