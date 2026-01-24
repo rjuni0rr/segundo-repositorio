@@ -20,7 +20,6 @@ class UpdateUserRequest extends FormRequest
             'phone'       => 'required|min:10|max:11',
             'address'     => 'nullable|string|max:255',
             'status'      => 'required|boolean',
-            'category_id' => 'required|exists:categories,id',
         ];
     }
 
@@ -49,9 +48,6 @@ class UpdateUserRequest extends FormRequest
             // Status
             'status.required' => 'O status é obrigatório.',
             'status.boolean'  => 'O status informado é inválido.',
-
-            // Categorias
-            'category_id.required' => 'A categoria é obrigatória.',
         ];
     }
 }

@@ -25,7 +25,7 @@ class CreateUserRequest extends FormRequest
             'phone'  => 'required',
             'status' => 'required|boolean',
             'password' => 'required|min:6',
-            'category_id' => 'required|exists:categories,id',
+            'role' => 'required',
             'birth_date' => 'required',
             'address' => 'required',
         ];
@@ -62,7 +62,7 @@ class CreateUserRequest extends FormRequest
             'password.required' => 'A senha é obrigatória.',
             'password.min'      => 'A senha deve ter no mínimo 6 caracteres.',
 
-            'category_id.required' => 'A categoria é obrigatória.',
+            'role.required' => 'O tipo de usuário é obrigatório.',
 
             // Resto faltando(incompleto)
             'birth_date.required' => 'A data de nascimento é obrigatória.',

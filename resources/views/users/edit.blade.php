@@ -37,30 +37,15 @@
                     @error('status') <div class="text-danger">{{ $message }}</div> @enderror
                 </div>
 
-                <div class="col-md-9 mb-3">
+                <div class="col-md-12 mb-3">
                     <label class="form-label">Endereço</label>
                     <input type="text" name="address" class="form-control"
                            value="{{ old('address', $user->address) }}">
                     @error('address') <div class="text-danger">{{ $message }}</div> @enderror
                 </div>
 
-                <div class="col-md-3 mb-3">
-                    <label class="form-label">Categoria</label>
-                    <select name="category_id" class="form-select">
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"
-                                {{ old('category_id', $user->category_id) == $category->id ? 'selected' : '' }}>
-                                {{ $category->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('category_id') <div class="text-danger">{{ $message }}</div> @enderror
-                </div>
-
-
-
                 <div class="d-flex justify-content-end gap-2 mt-3">
-                    <a href="{{ route('home') }}" class="btn btn-secondary">
+                    <a href="{{ route('user.home') }}" class="btn btn-secondary">
                         Cancelar
                     </a>
                     <button class="btn btn-primary">

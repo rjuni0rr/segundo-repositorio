@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
                 'birth_date'  => '1990-05-10',
                 'cpf'         => '52998224725', // CPF válido
                 'address'     => 'Rua Central, 100',
-                'category_id' => 1,
+                'role' => 'sys-admin',
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ],
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
                 'birth_date'  => '1988-03-22',
                 'cpf'         => '16899535009', // CPF válido
                 'address'     => 'Av. Paulista, 500',
-                'category_id' => 2,
+                'role' => 'client-admin',
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ],
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
                 'birth_date'  => '1995-11-01',
                 'cpf'         => '98765432100', // CPF válido
                 'address'     => 'Rua das Flores, 45',
-                'category_id' => 3,
+                'role' => 'client-user',
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ],
@@ -59,7 +59,7 @@ class UserSeeder extends Seeder
                 'birth_date'  => '1992-08-18',
                 'cpf'         => '39053344705', // CPF válido
                 'address'     => 'Rua Secundária, 12',
-                'category_id' => 4,
+                'role' => 'guest',
                 'created_at'  => now(),
                 'updated_at'  => now(),
             ],

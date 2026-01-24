@@ -8,7 +8,7 @@
         'resources/js/users/delete.js'
     ])
 
-    <form method="GET" action="{{ route('home') }}" class="card mb-3">
+    <form method="GET" action="{{ route('user.home') }}" class="card mb-3">
         <div class="card-body">
             <div class="row g-3">
 
@@ -43,7 +43,7 @@
                     <button class="btn btn-primary w-150">
                         Buscar
                     </button>
-                    <a href="{{ route('home') }}" class="btn btn-secondary w-150">
+                    <a href="{{ route('user.home') }}" class="btn btn-secondary w-150">
                         Limpar filtros
                     </a>
                 </div>
@@ -100,14 +100,14 @@
             <div class="card-body table-responsive">
                 <table id="usersTable" class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Função</th>
-                            <th>Último acesso</th>
-                            <th>Status</th>
-                            <th>Ações</th>
-                        </tr>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Função</th>
+                        <th>Último acesso</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
                     </thead>
 
                     <tbody>
@@ -115,7 +115,7 @@
                         <tr>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->category->name ?? '-' }}</td>
+                            <td>{{ roleLabel($user->role) }}</td>
                             <td>{{ formatLastLogin($user->last_login) }}</td>
                             <td>
                                 @if ($user->status)

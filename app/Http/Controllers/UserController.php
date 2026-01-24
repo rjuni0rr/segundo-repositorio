@@ -62,9 +62,9 @@ class UserController extends Controller
 
     public function createUser()
     {
-        $categories = Category::orderBy('name')->get();
+        $users = User::orderBy('role')->get();
 
-        return view('users.create', compact('categories'));
+        return view('users.create', compact('users'));
     }
 
     public function createUserSubmit(CreateUserRequest $request)
@@ -77,7 +77,7 @@ class UserController extends Controller
         User::create($data);
 
         return redirect()
-            ->route('home')
+            ->route('user.home')
             ->with('success', 'Usuário cadastrado com sucesso.');
     }
 
@@ -100,13 +100,9 @@ class UserController extends Controller
         ]);
     }
 
-
-
     public function editUser(User $user)
     {
-        $categories = Category::orderBy('name')->get();
-
-        return view('users.edit', compact('user', 'categories'));
+        return view('users.edit', compact('user'));
     }
 
     public function editUserSubmit(UpdateUserRequest $request, User $user)
@@ -119,7 +115,7 @@ class UserController extends Controller
         $user->update($data);
 
         return redirect()
-            ->route('home')
+            ->route('user.home')
             ->with('success', 'Usuário atualizado com sucesso!');
     }
 
@@ -135,10 +131,9 @@ class UserController extends Controller
         $user->delete(); // ou soft delete
 
         return redirect()
-            ->route('home')
+            ->route('user.home')
             ->with('success', 'Usuário excluído com sucesso');
     }
-
 
     public function exportPdf()
     {

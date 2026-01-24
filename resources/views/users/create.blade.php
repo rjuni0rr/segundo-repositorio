@@ -89,15 +89,12 @@
 
                         <div class="mb-3">
                             <label class="form-label">Categoria</label>
-                            <select name="category_id" class="form-select">
+                            <select name="role" class="form-select">
                                 <option value="">Selecione</option>
-
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                        {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
+                                <option value="1" {{ old('role') === 'sys-admin' ? 'selected' : '' }}>Administrador</option>
+                                <option value="2" {{ old('role') === 'client-admin' ? 'selected' : '' }}>Gerente</option>
+                                <option value="3" {{ old('role') === 'client-user' ? 'selected' : '' }}>Funcionário</option>
+                                <option value="4" {{ old('role') === 'client-user' ? 'selected' : '' }}>Visitante</option>
                             </select>
                         </div>
 
@@ -105,7 +102,7 @@
                             Salvar
                         </button>
                         <hr>
-                        <a href="{{ route('home') }}" class="btn btn-secondary w-100">
+                        <a href="{{ route('user.home') }}" class="btn btn-secondary w-100">
                             Voltar
                         </a>
 

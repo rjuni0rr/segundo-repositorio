@@ -40,25 +40,24 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
-
-        // gates para o admin
-        Gate::define('admin', function ($user){
-            return $user->category_id === 1;
+        // gates to admin
+        Gate::define('sys-admin', function ($user){
+            return $user->role === 'sys-admin';
         });
 
-        // gates para o gerente
-        Gate::define('manager', function ($user){
-            return $user->category_id === 2;
+        // gates to client-admin
+        Gate::define('client-admin', function ($user){
+            return $user->role === 'client-admin';
         });
 
-        // gates para o funcionario
-        Gate::define('employee', function ($user){
-            return $user->category_id === 3;
+        // gates to client-user
+        Gate::define('client-user', function ($user){
+            return $user->role === 'client-user';
         });
 
-        // gates para o visitante
-        Gate::define('guest', function ($user){
-            return $user->category_id === 4;
+        // gates to generic client
+        Gate::define('client', function ($user){
+            return ($user->role === 'client-admin' || $user->role === 'client-user');
         });
     }
 

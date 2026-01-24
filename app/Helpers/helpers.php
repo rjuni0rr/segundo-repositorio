@@ -1,5 +1,6 @@
 <?php
 
+// mostrar erros do lado do servidor
 if(!function_exists('showServerError')){
     function showServerError()
     {
@@ -10,6 +11,8 @@ if(!function_exists('showServerError')){
         }
     }
 }
+
+// Formatar CPF
 function formatCpf($cpf)
 {
     return preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $cpf);
@@ -39,6 +42,19 @@ if (! function_exists('formatLastLogin')) {
     }
 }
 
+// Helper do role
+if (! function_exists('roleLabel')) {
+    function roleLabel(string $role): string
+    {
+        return match ($role) {
+            'sys-admin'     => 'Administrador',
+            'client-admin'  => 'Gerente',
+            'client-user'   => 'Funcionário',
+            'guest'         => 'Visitante',
+            default         => 'Indefinido',
+        };
+    }
+}
 
 //if (! function_exists('formatCpf')) {
 //    function formatCpf(?string $cpf): string

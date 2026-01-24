@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
@@ -16,11 +17,11 @@ Route::middleware(['guest', 'throttle:login'])->group(function (){
 
 });
 
-// auth routes
-Route::middleware(['auth', 'throttle:general'])->group(function () {
+// auth routes (apenas para o admin)
+Route::middleware(['auth', 'can:sys-admin', 'throttle:general'])->group(function () {
 
     // Homepage
-    Route::get('/', [UserController::class, 'index'])->name('home');
+    Route::get('/admin', [UserController::class, 'index'])->name('user.home');
 
     // Create user
     Route::get('/user/create', [UserController::class, 'createUser'])->name('user.create');
@@ -44,6 +45,25 @@ Route::middleware(['auth', 'throttle:general'])->group(function () {
 
 });
 
+
+// auth routes (para o manager
+Route::middleware(['auth', 'can:client-admin', 'throttle:general'])->group(function () {
+
+    // Homepage
+    Route::get('/', [ManagerController::class, 'index'])->name('manager.home');
+
+});
+
+
+
+
+// auth routes
+Route::middleware(['auth', 'throttle:general'])->group(function () {
+
+    // Logout
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+});
 // Limpar cache
 Route::get('/clear-app', function () {
 

@@ -38,10 +38,19 @@ class AuthController extends Controller
 
         // check if user exists and password matches
         if ($user && Hash::check(trim($request->password), $user->password)){
-
+            // check if user belongs to an active company (except admin)
+            if ($user->role !== 'sys-admin' && ($user->status != 1)){
+                return redirect()->back()->withInput()->with('server_error', 'Login inválido.');
+            }
+            // login user
             $this->loginUser($user);
 
-            return redirect()->route('home');
+            // redirect to home page or admin page if the user is admin
+            if ($user->role === 'sys-admin'){
+                return redirect()->route('user.home');
+            } else {
+                return redirect()->route('manager.home');
+            }
         } else {
             // login failed
             return redirect()
