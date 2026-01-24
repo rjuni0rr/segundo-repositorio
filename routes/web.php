@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
@@ -16,8 +17,10 @@ Route::middleware(['guest', 'throttle:login'])->group(function (){
 
 });
 
-// auth routes
-Route::middleware(['auth', 'throttle:general'])->group(function () {
+
+
+// auth routes (apenas admin)
+Route::middleware(['auth', 'can:admin', 'throttle:general'])->group(function () {
 
     // Homepage
     Route::get('/', [UserController::class, 'index'])->name('home');
@@ -39,8 +42,30 @@ Route::middleware(['auth', 'throttle:general'])->group(function () {
     // PDF
     Route::get('/users/export/pdf', [UserController::class, 'exportPdf'])->middleware('throttle:export')->name('users.export.pdf');
 
+});
+
+
+
+// auth routes (apenas manager)
+Route::middleware(['auth', 'can:manager', 'throttle:general'])->group(function (){
+
+    // Homepage
+    Route::get('/', [ManagerController::class, 'index'])->name('manager.home');
+
+});
+
+
+
+
+
+
+
+// auth routes
+Route::middleware(['auth', 'can:manager', 'throttle:general'])->group(function () {
+
     // Logout
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 });
 

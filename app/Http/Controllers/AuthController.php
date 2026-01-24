@@ -41,7 +41,14 @@ class AuthController extends Controller
 
             $this->loginUser($user);
 
-            return redirect()->route('home');
+            // redirect to home page or admin page if the user is admin
+            if ($user->category_id === 1){
+                dd($user);
+                return redirect()->route('home');
+            } else if ($user->category_id === 2) {
+                dd($user);
+                return redirect()->route('manager.home');
+            }
         } else {
             // login failed
             return redirect()
