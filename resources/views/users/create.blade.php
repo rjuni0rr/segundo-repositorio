@@ -91,10 +91,10 @@
                             <label class="form-label">Categoria</label>
                             <select name="role" class="form-select">
                                 <option value="">Selecione</option>
-                                <option value="1" {{ old('role') === 'sys-admin' ? 'selected' : '' }}>Administrador</option>
-                                <option value="2" {{ old('role') === 'client-admin' ? 'selected' : '' }}>Gerente</option>
-                                <option value="3" {{ old('role') === 'client-user' ? 'selected' : '' }}>Funcionário</option>
-                                <option value="4" {{ old('role') === 'client-user' ? 'selected' : '' }}>Visitante</option>
+                                <option value="sys-admin" {{ old('role') === 'sys-admin' ? 'selected' : '' }}>Administrador</option>
+                                <option value="client-admin" {{ old('role') === 'client-admin' ? 'selected' : '' }}>Gerente</option>
+                                <option value="client-admin" {{ old('role') === 'client-user' ? 'selected' : '' }}>Funcionário</option>
+                                <option value="guest" {{ old('role') === 'client-user' ? 'selected' : '' }}>Visitante</option>
                             </select>
                         </div>
 

@@ -62,9 +62,7 @@ class UserController extends Controller
 
     public function createUser()
     {
-        $users = User::orderBy('role')->get();
-
-        return view('users.create', compact('users'));
+        return view('users.create');
     }
 
     public function createUserSubmit(CreateUserRequest $request)
@@ -143,6 +141,5 @@ class UserController extends Controller
 
         return $pdf->download('usuarios.pdf');
     }
-
 
 }

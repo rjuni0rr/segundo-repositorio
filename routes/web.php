@@ -40,17 +40,31 @@ Route::middleware(['auth', 'can:sys-admin', 'throttle:general'])->group(function
     // PDF
     Route::get('/users/export/pdf', [UserController::class, 'exportPdf'])->middleware('throttle:export')->name('users.export.pdf');
 
-    // Logout
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
 });
 
 
-// auth routes (para o manager
+// auth routes (para o manager)
 Route::middleware(['auth', 'can:client-admin', 'throttle:general'])->group(function () {
 
     // Homepage
-    Route::get('/', [ManagerController::class, 'index'])->name('manager.home');
+    Route::get('/manager', [ManagerController::class, 'index'])->name('manager.home');
+
+    // Create user
+    Route::get('/manager/users/create', [ManagerController::class, 'createUser'])->name('manager.create');
+    Route::post('/manager/users/create', [ManagerController::class, 'createUserSubmit'])->name('manager.create.submit');
+
+    // Show user (PROVISÓRIO, pois é do user??)
+    Route::get('/users/{id}/show', [UserController::class, 'show'])->name('users.show');
+
+    // Edit User
+    Route::get('/manager/{user}/edit', [ManagerController::class, 'editUser'])->name('manager.edit');
+    Route::put('/manager/{user}', [ManagerController::class, 'editUserSubmit'])->name('manager.edit.submit');
+
+    // Delete User (PROVISÓRIO, pois é do user(ou manager)??)
+    Route::delete('/users/{id}', [ManagerController::class, 'destroy'])->name('users.destroy');
+
+    // PDF
+    Route::get('/users/export/pdf', [UserController::class, 'exportPdf'])->middleware('throttle:export')->name('users.export.pdf');
 
 });
 
@@ -64,6 +78,7 @@ Route::middleware(['auth', 'throttle:general'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
+
 // Limpar cache
 Route::get('/clear-app', function () {
 

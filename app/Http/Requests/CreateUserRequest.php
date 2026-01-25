@@ -14,6 +14,8 @@ class CreateUserRequest extends FormRequest
 
     public function rules(): array
     {
+        $allowedRoles = $this->allowedRoles();
+
         return [
             'name'   => 'required|string|max:255',
             'email'  => 'required|email|unique:users,email',
@@ -25,12 +27,11 @@ class CreateUserRequest extends FormRequest
             'phone'  => 'required',
             'status' => 'required|boolean',
             'password' => 'required|min:6',
-            'role' => 'required',
+            'role' => ['required', 'in:' . implode(',', $allowedRoles)],
             'birth_date' => 'required',
             'address' => 'required',
         ];
     }
-
 
     public function messages(): array
     {
@@ -68,5 +69,15 @@ class CreateUserRequest extends FormRequest
             'birth_date.required' => 'A data de nascimento é obrigatória.',
             'address.required' => 'O Endereço é obrigatório.',
         ];
+    }
+
+    // permitir que o create seja diferente de cada usuário(admin pode criar diferentes tipos de usuários do client-admin)
+    protected function allowedRoles(): array
+    {
+        return match (auth()->user()->role) {
+            'sys-admin'    => ['sys-admin', 'client-admin', 'client-user', 'guest'],
+            'client-admin' => ['client-user', 'guest'],
+            default        => [],
+        };
     }
 }

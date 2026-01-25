@@ -45,12 +45,8 @@ class AuthController extends Controller
             // login user
             $this->loginUser($user);
 
-            // redirect to home page or admin page if the user is admin
-            if ($user->role === 'sys-admin'){
-                return redirect()->route('user.home');
-            } else {
-                return redirect()->route('manager.home');
-            }
+            // redirect
+            return $this->redirectByRole();
         } else {
             // login failed
             return redirect()
@@ -71,7 +67,7 @@ class AuthController extends Controller
         auth()->login($user);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         // logout
         auth()->logout();
@@ -84,4 +80,18 @@ class AuthController extends Controller
 
         return redirect()->route('login');
     }
+
+    protected function redirectByRole()
+    {
+        $role = auth()->user()->role;
+
+        return match ($role) {
+            'sys-admin'     => redirect()->route('user.home'),
+            'client-admin'  => redirect()->route('manager.home'),
+            'client-user'   => redirect()->route('client.home'),
+            'guest'         => redirect()->route('guest.home'),
+            default         => redirect()->route('login'),
+        };
+    }
+
 }
