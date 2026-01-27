@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
-
 
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -16,6 +17,7 @@ Route::middleware(['guest', 'throttle:login'])->group(function (){
     Route::post('/login-submit', [AuthController::class, 'loginSubmit'])->name('login.submit');
 
 });
+
 
 // auth routes (apenas para o admin)
 Route::middleware(['auth', 'can:sys-admin', 'throttle:general'])->group(function () {
@@ -64,9 +66,21 @@ Route::middleware(['auth', 'can:client-admin', 'throttle:general'])->group(funct
     Route::delete('/users/{id}', [ManagerController::class, 'destroy'])->name('users.destroy');
 
     // PDF
-    Route::get('/users/export/pdf', [UserController::class, 'exportPdf'])->middleware('throttle:export')->name('users.export.pdf');
+    Route::get('/manager/export/pdf', [ManagerController::class, 'exportPdf'])->middleware('throttle:export')->name('manager.export.pdf');
 
 });
+
+
+
+
+// auth routes (para o employee)
+Route::middleware(['auth', 'can:client-user', 'throttle:general'])->group(function () {
+
+    // Homepage
+    Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.home');
+
+});
+
 
 
 

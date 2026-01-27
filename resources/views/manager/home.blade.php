@@ -45,7 +45,7 @@
                             <button class="btn btn-outline-secondary" onclick="showUser('{{ Crypt::encryptString($user->id) }}')"><i class="fa-solid fa-bars"></i></button>
                             <a href="{{ route('manager.edit', $user) }}" class="btn btn-outline-primary" title="Editar"><i class="fa-regular fa-pen-to-square"></i></a>
                             <button class="btn btn-outline-danger" onclick="confirmDeleteUser('{{ Crypt::encryptString($user->id) }}')"><i class="fa-regular fa-trash-can"></i></button>
-                            <a href="{{ route('users.export.pdf') }}" class="btn btn-outline-success"><i class="fa-solid fa-file"></i></a>
+                            <a href="{{ route('manager.export.pdf') }}" class="btn btn-outline-success"><i class="fa-solid fa-file"></i></a>
                         </div>
                     </td>
                 </tr>

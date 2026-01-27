@@ -137,9 +137,10 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        $pdf = Pdf::loadView('users.pdf', compact('users'));
+        $pdf = Pdf::loadView('users.pdf', compact('users'))
+            ->setPaper('a4', 'landscape');
 
-        return $pdf->download('usuarios.pdf');
+        return $pdf->download('relatorio_geral.pdf');
     }
 
 }

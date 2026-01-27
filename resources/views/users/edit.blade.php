@@ -16,7 +16,7 @@
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Telefone</label>
-                    <input type="text" name="phone" class="form-control"
+                    <input type="text" name="phone" id="phone" class="form-control"
                            value="{{ old('phone', $user->phone) }}">
                     @error('phone') <div class="text-danger">{{ $message }}</div> @enderror
                 </div>
@@ -55,4 +55,31 @@
             </div>
         </form>
     </div>
+    <script>
+        document.getElementById('phone').addEventListener('input', function (e) {
+            let value = e.target.value;
+
+            // Remove tudo que não for número
+            value = value.replace(/\D/g, '');
+
+            // Limita a 11 dígitos
+            value = value.substring(0, 11);
+
+            // Aplica DDD
+            if (value.length > 2) {
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+            }
+
+            // Celular (9 dígitos) ou fixo (8 dígitos)
+            if (value.length === 14) {
+                value = value.replace(/(\d{5})(\d{4})$/, '$1-$2');
+            } else {
+                value = value.replace(/(\d{4})(\d{4})$/, '$1-$2');
+            }
+
+            e.target.value = value;
+        });
+
+
+    </script>
 </x-layouts.auth-layout>

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
 
@@ -95,6 +96,18 @@ class ManagerController extends Controller
         return redirect()
             ->route('manager.home')
             ->with('success', 'Usuário excluído com sucesso');
+    }
+
+    public function exportPdf()
+    {
+        $users = User::whereIn('role', ['client-user', 'guest'])
+            ->orderBy('name')
+            ->get();
+
+        $pdf = Pdf::loadView('manager.pdf', compact('users'))
+            ->setPaper('a4', 'landscape');
+
+        return $pdf->download('relatorio_gerente.pdf');
     }
 
 }

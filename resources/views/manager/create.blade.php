@@ -97,7 +97,7 @@
                         Salvar
                     </button>
                     <hr>
-                    <a href="{{ route('user.home') }}" class="btn btn-secondary w-100">
+                    <a href="{{ route('manager.home') }}" class="btn btn-secondary w-100">
                         Voltar
                     </a>
 
@@ -106,5 +106,48 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('cpf').addEventListener('input', function (e) {
+            let value = e.target.value;
 
+            // Remove tudo que não for número
+            value = value.replace(/\D/g, '');
+
+            // Limita a 11 dígitos
+            value = value.substring(0, 11);
+
+            // Aplica a máscara
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+            e.target.value = value;
+        });
+
+        document.getElementById('phone').addEventListener('input', function (e) {
+            let value = e.target.value;
+
+            // Remove tudo que não for número
+            value = value.replace(/\D/g, '');
+
+            // Limita a 11 dígitos
+            value = value.substring(0, 11);
+
+            // Aplica DDD
+            if (value.length > 2) {
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+            }
+
+            // Celular (9 dígitos) ou fixo (8 dígitos)
+            if (value.length === 14) {
+                value = value.replace(/(\d{5})(\d{4})$/, '$1-$2');
+            } else {
+                value = value.replace(/(\d{4})(\d{4})$/, '$1-$2');
+            }
+
+            e.target.value = value;
+        });
+
+
+    </script>
 </x-layouts.auth-layout>

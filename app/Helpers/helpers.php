@@ -56,6 +56,7 @@ if (! function_exists('roleLabel')) {
     }
 }
 
+
 //if (! function_exists('formatCpf')) {
 //    function formatCpf(?string $cpf): string
 //    {
