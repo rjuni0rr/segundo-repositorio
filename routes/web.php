@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\EmployeeController;
@@ -87,6 +88,9 @@ Route::middleware(['auth', 'can:client-user', 'throttle:general'])->group(functi
 
 // auth routes
 Route::middleware(['auth', 'throttle:general'])->group(function () {
+
+    Route::get('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePasswordSubmit'])->name('password.update.submit');
 
     // Logout
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

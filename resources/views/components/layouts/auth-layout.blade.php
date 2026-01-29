@@ -13,6 +13,13 @@
     {{--  DataTables  --}}
     <link rel="stylesheet" href="{{ asset('assets/datatables/datatables.min.css') }}">
     <script src="{{ asset('assets/datatables/datatables.min.js') }}"></script>
+
+    {{--  flatpickr  --}}
+    @if(!empty($flatpickr))
+        <link rel="stylesheet" href="{{ asset('assets/flatpickr/flatpickr.min.css') }}">
+        <script src="{{ asset('assets/flatpickr/flatpickr.min.js') }}"></script>
+        <script src="{{ asset('assets/flatpickr/pt.js') }}"></script>
+    @endif
 </head>
 
 <body class="bg-light">
