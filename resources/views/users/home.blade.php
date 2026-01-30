@@ -2,7 +2,6 @@
 
     @include('users.modals.show_modal')
     @include('users.modals.delete_modal')
-    @include('layouts.navbar')
 
     @vite([
         'resources/js/users/show.js',

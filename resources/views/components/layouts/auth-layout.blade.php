@@ -23,7 +23,7 @@
 </head>
 
 <body class="bg-light">
-
+    @include('layouts.navbar')
     <div class="p-8">
         {{ $slot }}
     </div>
