@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -14,7 +15,7 @@ class ProfileController extends Controller
 
     public function updatePasswordSubmit(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'current_password' => 'required',
             'password' => [
                 'required',
@@ -33,19 +34,24 @@ class ProfileController extends Controller
 
         $user = auth()->user();
 
-        if (! Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors([
-                'current_password' => 'A senha atual está incorreta.',
-            ]);
+        if (! Hash::check($validated['current_password'], $user->password)) {
+            return response()->json([
+                'message' => 'A senha atual está incorreta.'
+            ], 422);
         }
 
         $user->update([
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()
-            ->route('user.home')
-            ->with('success', 'Senha atualizada com sucesso!');
+        // 🔐 LOGOUT FORÇADO
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
+        return response()->json([
+            'message' => 'Senha alterada com sucesso. Você será redirecionado para o login.',
+            'redirect' => route('login')
+        ]);
     }
 }

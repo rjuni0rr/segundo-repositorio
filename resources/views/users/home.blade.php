@@ -2,67 +2,66 @@
 
     @include('users.modals.show_modal')
     @include('users.modals.delete_modal')
+    @include('layouts.navbar')
 
     @vite([
         'resources/js/users/show.js',
         'resources/js/users/delete.js'
     ])
 
-    <form method="GET" action="{{ route('user.home') }}" class="card mb-3">
-        <div class="card-body">
-            <div class="row g-3">
+    {{--    <form method="GET" action="{{ route('user.home') }}" class="card mb-3">--}}
+    {{--        <div class="card-body">--}}
+    {{--            <div class="row g-3">--}}
 
-                <div class="col-md-3">
-                    <label class="form-label">Nome</label>
-                    <input type="text" name="name" class="form-control"
-                           value="{{ request('name') }}">
-                </div>
+    {{--                <div class="col-md-3">--}}
+    {{--                    <label class="form-label">Nome</label>--}}
+    {{--                    <input type="text" name="name" class="form-control"--}}
+    {{--                           value="{{ request('name') }}">--}}
+    {{--                </div>--}}
 
-                <div class="col-md-3">
-                    <label class="form-label">CPF</label>
-                    <input type="text" name="cpf" class="form-control"
-                           value="{{ request('cpf') }}">
-                </div>
+    {{--                <div class="col-md-3">--}}
+    {{--                    <label class="form-label">CPF</label>--}}
+    {{--                    <input type="text" name="cpf" class="form-control"--}}
+    {{--                           value="{{ request('cpf') }}">--}}
+    {{--                </div>--}}
 
-                <div class="col-md-3">
-                    <label class="form-label">Email</label>
-                    <input type="text" name="email" class="form-control"
-                           value="{{ request('email') }}">
-                </div>
+    {{--                <div class="col-md-3">--}}
+    {{--                    <label class="form-label">Email</label>--}}
+    {{--                    <input type="text" name="email" class="form-control"--}}
+    {{--                           value="{{ request('email') }}">--}}
+    {{--                </div>--}}
 
-                <div class="col-md-2">
-                    <label class="form-label">Status</label>
-                    <select name="status" class="form-select">
-                        <option value="">Todos</option>
-                        <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Ativo</option>
-                        <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Inativo</option>
-                    </select>
-                </div>
+    {{--                <div class="col-md-2">--}}
+    {{--                    <label class="form-label">Status</label>--}}
+    {{--                    <select name="status" class="form-select">--}}
+    {{--                        <option value="">Todos</option>--}}
+    {{--                        <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Ativo</option>--}}
+    {{--                        <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Inativo</option>--}}
+    {{--                    </select>--}}
+    {{--                </div>--}}
 
-                <div class="col-md-1 d-flex align-items-end">
-                    <button class="btn btn-primary w-150">
-                        Buscar
-                    </button>
-                    <a href="{{ route('user.home') }}" class="btn btn-secondary w-150">
-                        Limpar filtros
-                    </a>
-                </div>
+    {{--                <div class="col-md-1 d-flex align-items-end">--}}
+    {{--                    <button class="btn btn-primary w-150">--}}
+    {{--                        Buscar--}}
+    {{--                    </button>--}}
+    {{--                    <a href="{{ route('user.home') }}" class="btn btn-secondary w-150">--}}
+    {{--                        Limpar filtros--}}
+    {{--                    </a>--}}
+    {{--                </div>--}}
 
-            </div>
-        </div>
-    </form>
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </form>--}}
 
-
+    {{--  --}}
     <div class="container-fluid mt-4">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4>Gestão de usuários</h4>
             <a href="{{ route('user.create') }}" class="btn btn-dark btn-sm">+ Novo usuário</a>
-            <a href="{{ route('password.update') }}" class="btn btn-dark btn-sm">Mudar senha</a>
-            <a href="{{ route('logout') }}" class="btn btn-secondary btn-sm">Sair</a>
         </div>
 
-        <div class="row g-3 mb-4">
+        <div class="row g-3 mb-4 justify-center">
             <div class="col-md-3">
                 <div class="card shadow-sm text-center">
                     <div class="card-body">
@@ -127,10 +126,16 @@
                             </td>
                             <td>
                                 <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-outline-secondary" onclick="showUser('{{ Crypt::encryptString($user->id) }}')"><i class="fa-solid fa-bars"></i></button>
-                                    <a href="{{ route('users.edit', $user) }}" class="btn btn-outline-primary" title="Editar"><i class="fa-regular fa-pen-to-square"></i></a>
-                                    <button class="btn btn-outline-danger" onclick="confirmDeleteUser('{{ Crypt::encryptString($user->id) }}')"><i class="fa-regular fa-trash-can"></i></button>
-                                    <a href="{{ route('users.export.pdf') }}" class="btn btn-outline-success"><i class="fa-solid fa-file"></i></a>
+                                    <button class="btn btn-outline-secondary"
+                                            onclick="showUser('{{ Crypt::encryptString($user->id) }}')"><i
+                                            class="fa-solid fa-bars"></i></button>
+                                    <a href="{{ route('users.edit', $user) }}" class="btn btn-outline-primary"
+                                       title="Editar"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <button class="btn btn-outline-danger"
+                                            onclick="confirmDeleteUser('{{ Crypt::encryptString($user->id) }}')"><i
+                                            class="fa-regular fa-trash-can"></i></button>
+                                    <a href="{{ route('users.export.pdf') }}" class="btn btn-outline-success"><i
+                                            class="fa-solid fa-file"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -143,6 +148,7 @@
 
     </div>
 
+    {{--  Datatables  --}}
     <script>
         $(document).ready(function () {
             $('#usersTable').DataTable({

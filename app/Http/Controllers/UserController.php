@@ -92,8 +92,8 @@ class UserController extends Controller
         return response()->json([
             'name'  => $user->name,
             'email' => $user->email,
-            'phone' => $user->phone_formatted,
-            'cpf'   => $user->cpf_formatted ?? null,
+            'phone' => formatPhone($user->phone),
+            'cpf'   => formatCpf($user->cpf),
             'created_at' => $user->created_at->format('d/m/Y H:i'),
         ]);
     }

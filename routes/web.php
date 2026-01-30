@@ -31,7 +31,7 @@ Route::middleware(['auth', 'can:sys-admin', 'throttle:general'])->group(function
     Route::post('/user/create', [UserController::class, 'createUserSubmit'])->name('user.create.submit');
 
     // Show user
-    Route::get('/users/{id}/show', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users/{user}/show', [UserController::class, 'show'])->name('users.show');
 
     // Edit User
     Route::get('/user/{user}/edit', [UserController::class, 'editUser'])->name('users.edit');
@@ -57,7 +57,7 @@ Route::middleware(['auth', 'can:client-admin', 'throttle:general'])->group(funct
     Route::post('/manager/users/create', [ManagerController::class, 'createUserSubmit'])->name('manager.create.submit');
 
     // Show user (PROVISÓRIO, pois é do user??)
-    Route::get('/users/{id}/show', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users/{user}/show', [UserController::class, 'show'])->name('users.show');
 
     // Edit User
     Route::get('/manager/{user}/edit', [ManagerController::class, 'editUser'])->name('manager.edit');
@@ -89,6 +89,7 @@ Route::middleware(['auth', 'can:client-user', 'throttle:general'])->group(functi
 // auth routes
 Route::middleware(['auth', 'throttle:general'])->group(function () {
 
+    // Alterar senha
     Route::get('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePasswordSubmit'])->name('password.update.submit');
 
