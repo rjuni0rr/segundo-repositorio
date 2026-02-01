@@ -36,6 +36,7 @@
                                 Entrar
                             </button>
                         </div>
+                        <a href="{{ route('password.request') }}">Esqueci minha senha</a>
                     </form>
 
                 </div>

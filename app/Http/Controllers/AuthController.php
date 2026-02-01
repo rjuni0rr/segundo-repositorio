@@ -17,7 +17,7 @@ class AuthController extends Controller
     {
         // form validation
         $request->validate(
-        // rules for validation
+            // rules for validation
             [
                 'email' => 'required|email',
                 'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,16}$/'

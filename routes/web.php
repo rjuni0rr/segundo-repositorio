@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,12 @@ Route::middleware(['guest', 'throttle:login'])->group(function (){
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login-submit', [AuthController::class, 'loginSubmit'])->name('login.submit');
 
+
+    Route::get('/forgot-password', [PasswordController::class, 'forgetPassword'])->name('password.request');
+    Route::post('/forgot-password', [PasswordController::class, 'forgetPasswordSubmit'])->name('password.email');
+
+    Route::get('/reset-password/{token}', [PasswordController::class, 'resetPassword'])->name('password.reset');
+    Route::post('/reset-password', [PasswordController::class, 'resetPasswordSubmit'])->name('password.update');
 });
 
 
@@ -46,8 +53,8 @@ Route::middleware(['auth', 'can:sys-admin', 'throttle:general'])->group(function
 });
 
 
-// auth routes (para o manager)
-Route::middleware(['auth', 'can:client-admin', 'throttle:general'])->group(function () {
+// auth routes (para o manager) (ESTA SEM GATES can:client-admin POR CAUSA DO SHOW)
+Route::middleware(['auth', 'throttle:general'])->group(function () {
 
     // Homepage
     Route::get('/manager', [ManagerController::class, 'index'])->name('manager.home');
@@ -84,8 +91,6 @@ Route::middleware(['auth', 'can:client-user', 'throttle:general'])->group(functi
 
 
 
-
-
 // auth routes
 Route::middleware(['auth', 'throttle:general'])->group(function () {
 
@@ -97,6 +102,9 @@ Route::middleware(['auth', 'throttle:general'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
+
+
+
 
 // Limpar cache
 Route::get('/clear-app', function () {
