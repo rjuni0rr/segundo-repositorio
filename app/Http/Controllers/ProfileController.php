@@ -44,7 +44,7 @@ class ProfileController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        // 🔐 LOGOUT FORÇADO
+        // força o logout
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

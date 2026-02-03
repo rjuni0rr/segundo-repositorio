@@ -7,12 +7,11 @@
                 <meta name="csrf-token" content="{{ csrf_token() }}">
                 @method('PUT')
 
-
-
                 <div class="modal-header">
                     <h5 class="modal-title">Alterar senha de usuário</h5>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+
                 <div class="modal-body">
 
                     {{-- Erros --}}
@@ -130,5 +129,6 @@
     `;
             });
     });
+
 </script>
 

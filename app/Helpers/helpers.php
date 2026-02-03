@@ -1,4 +1,16 @@
 <?php
+// mostrar erros do lado do usuário
+if(!function_exists('showValidationError')){
+    function showValidationError($fieldName, $validationErrors)
+    {
+        if($validationErrors->has($fieldName)){
+            return '<div class="alert alert-danger" role="alert">' . $validationErrors->first($fieldName) . '</div>';
+        } else {
+            return '';
+        }
+    }
+}
+
 
 // mostrar erros do lado do servidor
 if(!function_exists('showServerError')){

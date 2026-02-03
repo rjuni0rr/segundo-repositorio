@@ -6,7 +6,13 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h4 class="text-center mb-4">Acesso ao Sistema</h4>
-
+                    {{--  Senha resetada  --}}
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('login.submit') }}" novalidate>
 
                         @csrf

@@ -29,7 +29,7 @@ class PasswordController extends Controller
 
         return back()->with(
             'status',
-            'Se o email existir, um link foi enviado para a sua caixa de mensagens.'
+            'Um link foi enviado para a sua caixa de mensagens.'
         );
     }
 
@@ -55,10 +55,10 @@ class PasswordController extends Controller
                 'regex:/[0-9]/',
             ],
         ], [
-            'password.required' => 'A senha é obrigatória.',
-            'password.confirmed' => 'A confirmação não confere.',
-            'password.min' => 'Mínimo de 8 caracteres.',
-            'password.regex' => 'Deve conter letra maiúscula e número.',
+            'password.required' => 'A nova senha é obrigatória.',
+            'password.confirmed' => 'A confirmação da senha não confere.',
+            'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
+            'password.regex' => 'A senha deve conter ao menos uma letra maiúscula e um número.',
         ]);
 
         $status = Password::reset(
