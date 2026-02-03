@@ -17,7 +17,7 @@ if(!function_exists('showServerError')){
     function showServerError()
     {
         if(session()->has('server_error')){
-            return '<div class="text-sm italic text-red-500">' . session()->get('server_error') . '</div>';
+            return '<div class="alert alert-danger" role="alert">' . session()->get('server_error') . '</div>';
         } else {
             return '';
         }

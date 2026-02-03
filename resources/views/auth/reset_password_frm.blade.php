@@ -1,15 +1,17 @@
 <x-layouts.guest-layout subtitle="{{ empty($subtitle) ? '' : $subtitle }}">
+
     <div class="container">
-        <div class="row justify-content-center align-items-center vh-100">
-            <div class="col-md-4">
-                <div class="card-body">
-                    <form id="changePasswordForm" method="POST" action="{{ route('password.update') }}" class="card p-4">
+        <div class="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+            <div class="card shadow-sm border-0" style="width: 420px;">
+                <div class="card-body p-4">
+
+                    <form method="POST" action="{{ route('password.update') }}">
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">
                         <input type="hidden" name="email" value="{{ $email }}">
 
-                        <h5 class="text-center mb-3">Redefinir senha</h5>
+                        <h5 class="text-center mb-3">Configurar nova senha</h5>
 
                         {{-- Caso ocorra erros --}}
                         @if ($errors->any())
@@ -22,14 +24,18 @@
                             </div>
                         @endif
 
-                        <input type="password" name="password" class="form-control mb-2" placeholder="Nova senha">
-                        <input type="password" name="password_confirmation" class="form-control mb-3" placeholder="Confirmar nova senha">
+                        <div class="mb-3">
+                            <input type="password" name="password" class="form-control mb-2" placeholder="Nova senha">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" name="password_confirmation" class="form-control mb-3" placeholder="Confirmar nova senha">
+                        </div>
 
-                        <button class="btn btn-success w-100">
-                            Salvar nova senha
+                        <button class="btn btn-success w-100 py-2 fw-semibold">
+                            Redefinir senha
                         </button>
                         <hr>
-                        <a href="{{ route('login') }}" class="btn btn-secondary">
+                        <a href="{{ route('login') }}" class="btn btn-secondary w-100 py-2 fw-semibold">
                             Cancelar
                         </a>
                     </form>
