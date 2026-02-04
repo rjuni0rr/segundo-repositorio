@@ -29,7 +29,7 @@
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <div class="input-group">
-                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"  placeholder="seu@email.com" required>
+                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="admin@sistema.com"  placeholder="seu@email.com" required>
                                 @error('email')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -41,7 +41,7 @@
                         <div class="mb-3">
                             <label class="form-label">Senha</label>
                             <div class="input-group">
-                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="********" required>
+                                <input type="password" name="password" value="Aa123456" class="form-control @error('password') is-invalid @enderror" placeholder="********" required>
                                 @error('password')
                                 <div class="invalid-feedback">
                                     {{ $message }}

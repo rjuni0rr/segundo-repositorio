@@ -54,4 +54,6 @@ class ProfileController extends Controller
             'redirect' => route('login')
         ]);
     }
+
+
 }

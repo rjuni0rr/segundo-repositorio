@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Employee\editProfileController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -87,6 +88,8 @@ Route::middleware(['auth', 'can:client-user', 'throttle:general'])->group(functi
     // Homepage
     Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.home');
 
+    Route::get('/employee/profile', [editProfileController::class, 'profile'])->name('employee.profile');
+    Route::post('/employee/profile', [editProfileController::class, 'updateProfile'])->name('employee.profile.update');
 });
 
 

@@ -68,6 +68,13 @@ if (! function_exists('roleLabel')) {
     }
 }
 
+// Helper do status
+function statusLabel($status)
+{
+    return $status == 1
+        ? '<span class="text-success">Ativo</span>'
+        : '<span class="text-danger">Inativo</span>';
+}
 
 //if (! function_exists('formatCpf')) {
 //    function formatCpf(?string $cpf): string
