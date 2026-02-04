@@ -9,7 +9,7 @@
         <div class="d-flex align-items-center">
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" alt="user" width="32" height="32" class="rounded-circle me-2">
+                    <img src="{{ auth()->user()->profilePhotoUrl() }}" alt="user" width="32" height="32" class="rounded-circle me-2">
                     <span class="fw-semibold">
                         {{ auth()->user()->name }}
                     </span>

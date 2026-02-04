@@ -27,12 +27,25 @@
             </div>
         @endif
 
-        <!-- Card -->
         <div class="card shadow-sm border-0">
             <div class="card-body p-4">
 
-                <form method="POST" action="{{ route('employee.profile.update') }}">
+                <form method="POST" action="{{ route('employee.profile.update') }}" enctype="multipart/form-data">
                     @csrf
+
+                    {{--        Questão das fotos            --}}
+                    <img src="{{ $user->profilePhotoUrl() }}" class="rounded-circle shadow-sm mb-3" width="120" height="120" style="object-fit: cover;">
+
+                    <div>
+                        <label class="btn btn-outline-primary btn-sm">
+                            Escolher Foto
+                            <input type="file" name="profile_photo" hidden>
+                        </label>
+                    </div>
+
+                    <small class="text-muted d-block mt-2">
+                        JPG, PNG até 2MB
+                    </small>
 
                     <!-- Nome -->
                     <div class="mb-3">

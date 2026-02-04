@@ -72,4 +72,11 @@ class User extends Authenticatable
         'last_login' => 'datetime',
     ];
 
+    public function profilePhotoUrl()
+    {
+        return $this->profile_photo
+            ? asset('storage/' . $this->profile_photo)
+            : asset('images/default-avatar.png');
+    }
+
 }
