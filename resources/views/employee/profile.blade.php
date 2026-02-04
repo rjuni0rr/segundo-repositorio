@@ -40,8 +40,7 @@
                         <input type="text"
                                name="name"
                                class="form-control"
-                               value="{{ old('name', $user->name) }}"
-                               required>
+                               value="{{ old('name', $user->name) }}">
                     </div>
 
                     <!-- Email (somente leitura) -->

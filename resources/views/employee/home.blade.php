@@ -59,11 +59,6 @@
                 <div class="card shadow-sm border-0 h-100">
                     <div class="card-body">
                         <h6 class="text-muted">Ações rápidas</h6>
-
-                        <button class="btn btn-outline-primary w-100 mb-2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
-                            Alterar senha
-                        </button>
-
                         <a href="{{ route('employee.profile') }}"
                            class="btn btn-outline-dark w-100">
                             👤 Meu Perfil
@@ -71,6 +66,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
 
@@ -114,6 +110,8 @@
 
             </div>
         </div>
+
+
 
     </div>
 </x-layouts.auth-layout>

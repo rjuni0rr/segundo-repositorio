@@ -20,11 +20,15 @@ class editProfileController extends Controller
 
         $request->validate([
             'name'    => 'required|string|max:255',
-            'phone'   => 'nullable|string|max:20',
-            'address' => 'nullable|string|max:255',
+            'phone'   => 'required|string|max:20',
+            'address' => 'required|string|max:255',
         ], [
             'name.required' => 'O nome é obrigatório.',
+            'phone.required' => 'O Telefone é obrigatório.',
+            'address.required' => 'O Endereço é obrigatório.',
+
             'name.max'      => 'O nome deve ter no máximo 255 caracteres.',
+            'address.max'      => 'O Endereço deve ter no máximo 255 caracteres.',
         ]);
 
         $user->update([
