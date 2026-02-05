@@ -59,7 +59,7 @@
                 <div class="card shadow-sm border-0 h-100">
                     <div class="card-body">
                         <h6 class="text-muted">Ações rápidas</h6>
-                        <a href="{{ route('employee.profile') }}"
+                        <a href="{{ route('profile.edit') }}"
                            class="btn btn-outline-dark w-100">
                             👤 Meu Perfil
                         </a>

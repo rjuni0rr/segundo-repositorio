@@ -3,57 +3,64 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function updatePassword()
+    public function profile()
     {
-        return view('profile.password');
+        return view('layouts.profile', [
+            'user' => auth()->user(),
+        ]);
     }
 
-    public function updatePasswordSubmit(Request $request)
+    public function updateProfile(Request $request)
     {
-        $validated = $request->validate([
-            'current_password' => 'required',
-            'password' => [
-                'required',
-                'confirmed',
-                'min:8',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
-            ],
-        ], [
-            'current_password.required' => 'A senha atual é obrigatória.',
-            'password.required' => 'A nova senha é obrigatória.',
-            'password.confirmed' => 'A confirmação da senha não confere.',
-            'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
-            'password.regex' => 'A senha deve conter ao menos uma letra maiúscula e um número.',
-        ]);
-
         $user = auth()->user();
 
-        if (! Hash::check($validated['current_password'], $user->password)) {
-            return response()->json([
-                'message' => 'A senha atual está incorreta.'
-            ], 422);
+        $request->validate([
+
+            'name'    => 'required|string|max:255',
+            'phone'   => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+
+        ],
+            [
+                'name.required' => 'O nome é obrigatório.',
+                'name.max'      => 'O nome deve ter no máximo 255 caracteres.',
+
+                'phone.required' => 'O Telefone é obrigatório.',
+
+                'address.required' => 'O Endereço é obrigatório.',
+                'address.max'      => 'O Endereço deve ter no máximo 255 caracteres.',
+
+                'profile_photo.image' => 'O arquivo deve ser uma imagem.',
+                'profile_photo.mimes' => 'A foto deve ser JPG ou PNG.',
+                'profile_photo.max' => 'A foto deve ter no máximo 2MB.',
+            ]);
+
+        // Upload da foto
+        if ($request->hasFile('profile_photo')) {
+
+            // apagar foto antiga caso tenha
+            if ($user->profile_photo && file_exists(public_path('storage/'.$user->profile_photo))) {
+                unlink(public_path('storage/'.$user->profile_photo));
+            }
+
+            $path = $request->file('profile_photo')
+                ->store('profile-photos', 'public');
+
+            $user->profile_photo = $path;
         }
 
         $user->update([
-            'password' => Hash::make($validated['password']),
+            'name'    => $request->name,
+            'phone'   => $request->phone,
+            'address' => $request->address,
         ]);
 
-        // força o logout
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $user->save();
 
-        return response()->json([
-            'message' => 'Senha alterada com sucesso. Você será redirecionado para o login.',
-            'redirect' => route('login')
-        ]);
+        return back()->with('success', 'Perfil atualizado com sucesso!');
     }
-
-
 }

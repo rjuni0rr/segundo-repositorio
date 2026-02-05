@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\Employee\editProfileController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
+
+use App\Http\Controllers\RolesController\EmployeeController;
+use App\Http\Controllers\RolesController\ManagerController;
+use App\Http\Controllers\RolesController\UserController;
+
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\ManagerController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthController;
-
 use Maatwebsite\Excel\Facades\Excel;
 
 // guest routes
@@ -88,8 +87,6 @@ Route::middleware(['auth', 'can:client-user', 'throttle:general'])->group(functi
     // Homepage
     Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.home');
 
-    Route::get('/employee/profile', [editProfileController::class, 'profile'])->name('employee.profile');
-    Route::post('/employee/profile', [editProfileController::class, 'updateProfile'])->name('employee.profile.update');
 });
 
 
@@ -97,9 +94,13 @@ Route::middleware(['auth', 'can:client-user', 'throttle:general'])->group(functi
 // auth routes
 Route::middleware(['auth', 'throttle:general'])->group(function () {
 
+    // Editar perfil(apenas o essencial)
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.edit');
+    Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+
     // Alterar senha
-    Route::get('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
-    Route::put('/profile/password', [ProfileController::class, 'updatePasswordSubmit'])->name('password.update.submit');
+    Route::get('/profile/password', [PasswordController::class, 'updatePassword'])->name('password.update');
+    Route::put('/profile/password', [PasswordController::class, 'updatePasswordSubmit'])->name('password.update.submit');
 
     // Logout
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

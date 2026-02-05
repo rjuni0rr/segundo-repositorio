@@ -76,6 +76,21 @@ function statusLabel($status)
         : '<span class="text-danger">Inativo</span>';
 }
 
+// Reutiliza mesma view, porém retorna para outros tipos de usuário.
+// Helper para retornar a home por tipo de usuário
+function home_by_role()
+{
+    $role = auth()->user()->role;
+
+    return match ($role) {
+        'sys-admin'    => route('user.home'),
+        'client-admin' => route('manager.home'),
+        'client-user'  => route('employee.home'),
+        'guest'        => route('guest.home'),
+        default        => route('login'),
+    };
+}
+
 //if (! function_exists('formatCpf')) {
 //    function formatCpf(?string $cpf): string
 //    {

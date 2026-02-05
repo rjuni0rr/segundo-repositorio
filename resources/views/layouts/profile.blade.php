@@ -30,7 +30,7 @@
         <div class="card shadow-sm border-0">
             <div class="card-body p-4">
 
-                <form method="POST" action="{{ route('employee.profile.update') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                     @csrf
 
                     {{--        Questão das fotos            --}}
@@ -90,7 +90,7 @@
 
                     <!-- Botões -->
                     <div class="d-flex justify-content-between mt-4">
-                        <a href="{{ route('employee.home') }}"
+                        <a href="{{ home_by_role() }}"
                            class="btn btn-outline-secondary">
                             Voltar
                         </a>

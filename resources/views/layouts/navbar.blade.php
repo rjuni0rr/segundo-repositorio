@@ -17,6 +17,9 @@
 
                 <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser">
                     <li>
+                        <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                            Editar perfil
+                        </a>
                         <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                             Alterar senha
                         </button>
