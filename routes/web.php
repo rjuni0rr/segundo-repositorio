@@ -94,9 +94,11 @@ Route::middleware(['auth', 'can:client-user', 'throttle:general'])->group(functi
 // auth routes
 Route::middleware(['auth', 'throttle:general'])->group(function () {
 
+
     // Editar perfil(apenas o essencial)
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+
 
     // Alterar senha
     Route::get('/profile/password', [PasswordController::class, 'updatePassword'])->name('password.update');
