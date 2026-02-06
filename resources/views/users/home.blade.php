@@ -8,59 +8,12 @@
         'resources/js/users/delete.js'
     ])
 
-    {{--    <form method="GET" action="{{ route('user.home') }}" class="card mb-3">--}}
-    {{--        <div class="card-body">--}}
-    {{--            <div class="row g-3">--}}
-
-    {{--                <div class="col-md-3">--}}
-    {{--                    <label class="form-label">Nome</label>--}}
-    {{--                    <input type="text" name="name" class="form-control"--}}
-    {{--                           value="{{ request('name') }}">--}}
-    {{--                </div>--}}
-
-    {{--                <div class="col-md-3">--}}
-    {{--                    <label class="form-label">CPF</label>--}}
-    {{--                    <input type="text" name="cpf" class="form-control"--}}
-    {{--                           value="{{ request('cpf') }}">--}}
-    {{--                </div>--}}
-
-    {{--                <div class="col-md-3">--}}
-    {{--                    <label class="form-label">Email</label>--}}
-    {{--                    <input type="text" name="email" class="form-control"--}}
-    {{--                           value="{{ request('email') }}">--}}
-    {{--                </div>--}}
-
-    {{--                <div class="col-md-2">--}}
-    {{--                    <label class="form-label">Status</label>--}}
-    {{--                    <select name="status" class="form-select">--}}
-    {{--                        <option value="">Todos</option>--}}
-    {{--                        <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Ativo</option>--}}
-    {{--                        <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Inativo</option>--}}
-    {{--                    </select>--}}
-    {{--                </div>--}}
-
-    {{--                <div class="col-md-1 d-flex align-items-end">--}}
-    {{--                    <button class="btn btn-primary w-150">--}}
-    {{--                        Buscar--}}
-    {{--                    </button>--}}
-    {{--                    <a href="{{ route('user.home') }}" class="btn btn-secondary w-150">--}}
-    {{--                        Limpar filtros--}}
-    {{--                    </a>--}}
-    {{--                </div>--}}
-
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </form>--}}
-
-    {{--  --}}
     <div class="container-fluid mt-4">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4>Gestão de usuários</h4>
-            <a href="{{ route('user.create') }}" class="btn btn-dark btn-sm">+ Novo usuário</a>
-        </div>
+        {{--   Dashboard     --}}
+        @include('layouts.dashboard')
 
-        <div class="row g-3 mb-4 justify-center">
+        <div class="row justify-content-center g-4 my-4">
             <div class="col-md-3">
                 <div class="card shadow-sm text-center">
                     <div class="card-body">
@@ -88,12 +41,6 @@
                 </div>
             </div>
         </div>
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
 
         <div class="card shadow-sm">
             <div class="card-body table-responsive">
@@ -154,6 +101,9 @@
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.8/i18n/pt-BR.json'
                 },
+                pageLength: 10,
+                lengthChange: false,
+                ordering: true,
                 searching: false,
                 paging: false,
                 info: false

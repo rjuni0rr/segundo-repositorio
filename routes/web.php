@@ -45,7 +45,7 @@ Route::middleware(['auth', 'can:sys-admin', 'throttle:general'])->group(function
     Route::put('/user/{user}', [UserController::class, 'editUserSubmit'])->name('users.edit.submit');
 
     // Delete User
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.');
 
     // PDF
     Route::get('/users/export/pdf', [UserController::class, 'exportPdf'])->middleware('throttle:export')->name('users.export.pdf');
@@ -70,8 +70,8 @@ Route::middleware(['auth', 'throttle:general'])->group(function () {
     Route::get('/manager/{user}/edit', [ManagerController::class, 'editUser'])->name('manager.edit');
     Route::put('/manager/{user}', [ManagerController::class, 'editUserSubmit'])->name('manager.edit.submit');
 
-    // Delete User (PROVISÓRIO, pois é do user(ou manager)??)
-    Route::delete('/users/{id}', [ManagerController::class, 'destroy'])->name('users.destroy');
+    // Delete User
+    Route::delete('/users/{id}', [ManagerController::class, 'destroy'])->name('manager.destroy');
 
     // PDF
     Route::get('/manager/export/pdf', [ManagerController::class, 'exportPdf'])->middleware('throttle:export')->name('manager.export.pdf');
@@ -108,8 +108,6 @@ Route::middleware(['auth', 'throttle:general'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
-
-
 
 
 // Limpar cache
