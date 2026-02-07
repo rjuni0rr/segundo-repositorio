@@ -1,4 +1,4 @@
-<div class="container py-2">
+<div class="container-fluid mt-4">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -60,19 +60,14 @@
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
                     <h6 class="text-muted">Ações rápidas</h6>
-                    <a href="{{ route('profile.edit') }}"
-                       class="btn btn-outline-success w-100">
-                        👤 Meu Perfil
-                    </a>
                     @if(auth()->user()->role === 'sys-admin')
                         <a href="{{ route('user.create') }}"
                            class="btn btn-outline-primary w-100 mt-2">
                             Criar novo usuário
                         </a>
-
                         <a href="{{ route('users.statistics') }}"
                            class="btn btn-outline-info w-100 mt-2">
-                            Estatisticas
+                            Listagem de usuários
                         </a>
                     @endif
 
@@ -130,3 +125,4 @@
         </div>
     </div>
 </div>
+<hr>

@@ -52,7 +52,7 @@ class UserController extends Controller
             'users',
             'totalUsers',
             'todayUsers',
-            'monthUsers'
+            'monthUsers',
         ));
     }
 
@@ -142,9 +142,35 @@ class UserController extends Controller
     public function statistics()
     {
         $data = [
-            'subtitle' => 'Estatísticas'
+            'subtitle' => 'Estatísticas',
+            'statsUsers' => $this->getUsersCount(),
         ];
 
         return view('users.statistics', $data);
+    }
+
+    private function getUsersCount()
+    {
+        // retorna globalmente (e cada um individual)
+        $totalUsers = User::withTrashed()->count();
+        $todayUsers = User::whereDate('created_at', Carbon::today())->count();
+        $monthUsers = User::whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->count();
+
+        // retorna se estão ativos/inativos
+        $totalActive = User::where('status', 1)->whereNull('deleted_at')->count();
+        $totalInactive = User::withTrashed()->where(function ($query){
+            $query->where('status', 0)->orWhereNotNull('deleted_at');
+        })->count();
+
+        return [
+            'total' => $totalUsers,
+            'todayUsers' => $todayUsers,
+            'monthUsers' => $monthUsers,
+            'active' => $totalActive,
+            'inactive' => $totalInactive,
+        ];
+
     }
 }
