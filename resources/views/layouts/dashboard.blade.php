@@ -28,9 +28,11 @@
                     <h4 class="fw-bold">
                         {!! statusLabel(auth()->user()->status) !!}
                     </h4>
-                    <small class="text-muted">
-                        Seu acesso está sendo monitorado pelo sistema.
-                    </small>
+                    @if(auth()->user()->role !== 'sys-admin')
+                        <small class="text-muted">
+                            Seu acesso está sendo monitorado pelo sistema.
+                        </small>
+                    @endif
                 </div>
             </div>
         </div>
