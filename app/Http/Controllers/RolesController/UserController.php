@@ -125,7 +125,7 @@ class UserController extends Controller
         $user->delete(); // ou soft delete
 
         return redirect()
-            ->route('user.home')
+            ->back()
             ->with('success', 'Usuário excluído com sucesso');
     }
 
@@ -139,4 +139,12 @@ class UserController extends Controller
         return $pdf->download('relatorio_geral.pdf');
     }
 
+    public function statistics()
+    {
+        $data = [
+            'subtitle' => 'Estatísticas'
+        ];
+
+        return view('users.statistics', $data);
+    }
 }

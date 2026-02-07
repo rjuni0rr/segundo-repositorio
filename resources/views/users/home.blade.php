@@ -13,34 +13,34 @@
         {{--   Dashboard     --}}
         @include('layouts.dashboard')
 
-        <div class="row justify-content-center g-4 my-4">
-            <div class="col-md-3">
-                <div class="card shadow-sm text-center">
-                    <div class="card-body">
-                        <small class="text-muted">Total de usuários</small>
-                        <h4 class="fw-bold">{{ $totalUsers  }}</h4>
-                    </div>
-                </div>
-            </div>
+{{--        <div class="row justify-content-center g-4 my-4">--}}
+{{--            <div class="col-md-3">--}}
+{{--                <div class="card shadow-sm text-center">--}}
+{{--                    <div class="card-body">--}}
+{{--                        <small class="text-muted">Total de usuários</small>--}}
+{{--                        <h4 class="fw-bold">{{ $totalUsers  }}</h4>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="col-md-3">
-                <div class="card shadow-sm text-center">
-                    <div class="card-body">
-                        <small class="text-muted">Cadastrados hoje</small>
-                        <h4 class="fw-bold">{{ $todayUsers }}</h4>
-                    </div>
-                </div>
-            </div>
+{{--            <div class="col-md-3">--}}
+{{--                <div class="card shadow-sm text-center">--}}
+{{--                    <div class="card-body">--}}
+{{--                        <small class="text-muted">Cadastrados hoje</small>--}}
+{{--                        <h4 class="fw-bold">{{ $todayUsers }}</h4>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="col-md-3">
-                <div class="card shadow-sm text-center">
-                    <div class="card-body">
-                        <small class="text-muted">Cadastrados no mês</small>
-                        <h4 class="fw-bold">{{ $monthUsers }}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--            <div class="col-md-3">--}}
+{{--                <div class="card shadow-sm text-center">--}}
+{{--                    <div class="card-body">--}}
+{{--                        <small class="text-muted">Cadastrados no mês</small>--}}
+{{--                        <h4 class="fw-bold">{{ $monthUsers }}</h4>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="card shadow-sm">
             <div class="card-body table-responsive">

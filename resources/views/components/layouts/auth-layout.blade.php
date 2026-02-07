@@ -14,7 +14,12 @@
     <link rel="stylesheet" href="{{ asset('assets/datatables/datatables.min.css') }}">
     <script src="{{ asset('assets/datatables/datatables.min.js') }}"></script>
 
-    {{--  flatpickr  --}}
+    {{--  ApexCharts -- conditional loading --}}
+    @if(!empty($apexcharts))
+        <script src="{{ asset('assets/apexcharts/apexcharts.js') }}"></script>
+    @endif
+
+    {{--  flatpickr -- conditional loading --}}
     @if(!empty($flatpickr))
         <link rel="stylesheet" href="{{ asset('assets/flatpickr/flatpickr.min.css') }}">
         <script src="{{ asset('assets/flatpickr/flatpickr.min.js') }}"></script>

@@ -93,7 +93,7 @@ class ManagerController extends Controller
         $user->delete(); // ou soft delete
 
         return redirect()
-            ->route('manager.home')
+            ->back()
             ->with('success', 'Usuário excluído com sucesso');
     }
 

@@ -45,10 +45,13 @@ Route::middleware(['auth', 'can:sys-admin', 'throttle:general'])->group(function
     Route::put('/user/{user}', [UserController::class, 'editUserSubmit'])->name('users.edit.submit');
 
     // Delete User
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.delete');
 
     // PDF
     Route::get('/users/export/pdf', [UserController::class, 'exportPdf'])->middleware('throttle:export')->name('users.export.pdf');
+
+    // Estatísticas
+    Route::get('/users/statistics', [UserController::class, 'statistics'])->name('users.statistics');
 
 });
 
@@ -71,7 +74,7 @@ Route::middleware(['auth', 'throttle:general'])->group(function () {
     Route::put('/manager/{user}', [ManagerController::class, 'editUserSubmit'])->name('manager.edit.submit');
 
     // Delete User
-    Route::delete('/users/{id}', [ManagerController::class, 'destroy'])->name('manager.destroy');
+    Route::delete('/users/{id}', [ManagerController::class, 'destroy'])->name('manager.delete');
 
     // PDF
     Route::get('/manager/export/pdf', [ManagerController::class, 'exportPdf'])->middleware('throttle:export')->name('manager.export.pdf');

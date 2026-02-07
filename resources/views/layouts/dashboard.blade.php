@@ -9,7 +9,6 @@
                 Aqui está o seu painel de acesso como {{ roleLabel(auth()->user()->role) }}.
             </p>
         </div>
-
     </div>
 
     {{--    Alerts    --}}
@@ -56,7 +55,7 @@
             </div>
         </div>
 
-
+        {{--    Ações rápidas    --}}
         <div class="col-md-4">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
@@ -69,6 +68,11 @@
                         <a href="{{ route('user.create') }}"
                            class="btn btn-outline-primary w-100 mt-2">
                             Criar novo usuário
+                        </a>
+
+                        <a href="{{ route('users.statistics') }}"
+                           class="btn btn-outline-info w-100 mt-2">
+                            Estatisticas
                         </a>
                     @endif
 
