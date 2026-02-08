@@ -10,25 +10,28 @@
 
             </div>
         </div>
-        <hr class="my-4">
-        <div class="row g-4 mb-4">
 
-            <!-- Card 1 -->
-            <div class="col-md-6">
-                <div class="main-card p-4">
-                    <p class="title-1">Clientes ativos e inativos</p>
-                    <p class="title-3">
-                        Total: <strong>{{ $statsUsers['total'] }}</strong>
-                    </p>
-                    <div id="chart_1"></div>
-                </div>
+        <hr class="my-4">
+
+        <div class="d-flex gap-4 mb-4">
+            <div class="card shadow-sm w-50 p-4 col-6">
+                <p class="h5 fw-bold">Clientes ativos e inativos</p>
+                <p class="text-muted">
+                    Total: <strong>{{ $statsUsers['total'] }}</strong>
+                </p>
+                <div id="chart_1"></div>
             </div>
 
+            <div class="card shadow-sm w-50 p-4 col-6">
+                <p class="h5 fw-bold">Clientes ativos e inativos</p>
+                <p class="text-muted">
+                    Total: <strong>{{ $statsUsers['total'] }}</strong>
+                </p>
+                <div id="chart_2"></div>
+            </div>
         </div>
-
     </div>
     <script>
-
         let chart_1 = new ApexCharts(document.querySelector("#chart_1"), {
             chart: {
                 type: "donut",
@@ -46,5 +49,22 @@
         });
         chart_1.render();
 
+        let chart_2 = new ApexCharts(document.querySelector("#chart_2"), {
+            chart: {
+                type: "donut",
+                height: 300,
+                toolbar: {
+                    show: true,
+                }
+            },
+            series: [
+                {{ $statsUsers['total'] }},
+                {{ $statsUsers['todayUsers'] }},
+                {{ $statsUsers['monthUsers'] }},
+            ],
+            labels: ['Total Usuários', 'Total no dia', 'Total no mês'],
+            colors: ["#00AA00", "#AA0000", "#0000AA"]
+        });
+        chart_2.render();
     </script>
 </x-layouts.auth-layout>
