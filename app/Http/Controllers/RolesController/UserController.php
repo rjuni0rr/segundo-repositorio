@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::query()
+        $users = User::whereNotIn('role', ['sys-admin']) // regra fixa
 
             ->when($request->filled('name'), function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->name . '%');

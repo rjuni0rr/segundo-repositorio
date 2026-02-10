@@ -90,7 +90,7 @@ class AuthController extends Controller
             'client-admin'  => redirect()->route('manager.home'),
             'client-user'   => redirect()->route('employee.home'),
             'guest'         => redirect()->route('guest.home'),
-            default         => redirect()->route('login'),
+            default         => abort(403),
         };
     }
 

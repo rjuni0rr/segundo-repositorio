@@ -3,15 +3,14 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
-
 use App\Http\Controllers\RolesController\EmployeeController;
+use App\Http\Controllers\RolesController\GuestController;
 use App\Http\Controllers\RolesController\ManagerController;
 use App\Http\Controllers\RolesController\UserController;
-
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 
-// guest routes
+// guest routes (para login)
 Route::middleware(['guest', 'throttle:login'])->group(function (){
 
     // authentication (login)
@@ -24,8 +23,8 @@ Route::middleware(['guest', 'throttle:login'])->group(function (){
 
     Route::get('/reset-password/{token}', [PasswordController::class, 'resetPassword'])->name('password.reset');
     Route::post('/reset-password', [PasswordController::class, 'resetPasswordSubmit'])->name('password.update');
-});
 
+});
 
 // auth routes (apenas para o admin)
 Route::middleware(['auth', 'can:sys-admin', 'throttle:general'])->group(function () {
@@ -54,7 +53,6 @@ Route::middleware(['auth', 'can:sys-admin', 'throttle:general'])->group(function
     Route::get('/users/statistics', [UserController::class, 'statistics'])->name('users.statistics');
 
 });
-
 
 // auth routes (para o manager) (ESTA SEM GATES can:client-admin POR CAUSA DO SHOW)
 Route::middleware(['auth', 'throttle:general'])->group(function () {
@@ -92,9 +90,15 @@ Route::middleware(['auth', 'can:client-user', 'throttle:general'])->group(functi
 
 });
 
+// guest routes
+Route::middleware(['can:guest', 'throttle:general'])->group(function () {
+
+    Route::get('/', [GuestController::class, 'index'])->name('guest.home');
+
+});
 
 
-// auth routes
+// auth routes (no geral)
 Route::middleware(['auth', 'throttle:general'])->group(function () {
 
 
