@@ -3,10 +3,12 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\RolesController\EmployeeController;
 use App\Http\Controllers\RolesController\GuestController;
 use App\Http\Controllers\RolesController\ManagerController;
 use App\Http\Controllers\RolesController\UserController;
+
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 
