@@ -35,4 +35,17 @@ return [
         ],
     ],
 
+
+    # Bot telegram 12/02/26
+    'telegram' => [
+        'bot_token' => env('BOT_TELEGRAM_TOKEN'),
+        'chat_id' => env('BOT_TELEGRAM_ID'),
+        'chat_ids' => explode(',', env('BOT_TELEGRAM_IDS')), # Abaixo está a versão completa e profissional para enviar alertas do sistema para vários chat_id ao mesmo tempo
+    ],
+
+    'telegram_report' => [
+        'bot_token' => env('BOT_REPORT_TELEGRAM_TOKEN'),
+        'chat_id' => env('BOT_REPORT_TELEGRAM_ID'),
+        'chat_ids' => explode(',', env('BOT_REPORT_TELEGRAM_IDS')), # Abaixo está a versão completa e profissional para enviar alertas do sistema para vários chat_id ao mesmo tempo
+    ],
 ];

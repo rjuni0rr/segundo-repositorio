@@ -11,6 +11,8 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Gate;
 use App\Listeners\UpdateLastLogin;
 
+use App\Models\User;
+use App\Observers\UserObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -63,6 +65,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('guest', function ($user) {
             return $user->role === 'guest';
         });
+
+        User::observe(UserObserver::class);
+
     }
 
     protected $listen = [
