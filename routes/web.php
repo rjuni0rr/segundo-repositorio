@@ -9,8 +9,9 @@ use App\Http\Controllers\RolesController\GuestController;
 use App\Http\Controllers\RolesController\ManagerController;
 use App\Http\Controllers\RolesController\UserController;
 
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
-use Maatwebsite\Excel\Facades\Excel;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 // guest routes (para login)
 Route::middleware(['guest', 'throttle:login'])->group(function (){
@@ -27,6 +28,7 @@ Route::middleware(['guest', 'throttle:login'])->group(function (){
     Route::post('/reset-password', [PasswordController::class, 'resetPasswordSubmit'])->name('password.update');
 
 });
+
 
 // auth routes (apenas para o admin)
 Route::middleware(['auth', 'can:sys-admin', 'throttle:general'])->group(function () {
@@ -56,6 +58,7 @@ Route::middleware(['auth', 'can:sys-admin', 'throttle:general'])->group(function
 
 });
 
+
 // auth routes (para o manager) (ESTA SEM GATES can:client-admin POR CAUSA DO SHOW)
 Route::middleware(['auth', 'throttle:general'])->group(function () {
 
@@ -82,8 +85,6 @@ Route::middleware(['auth', 'throttle:general'])->group(function () {
 });
 
 
-
-
 // auth routes (para o employee)
 Route::middleware(['auth', 'can:client-user', 'throttle:general'])->group(function () {
 
@@ -91,6 +92,7 @@ Route::middleware(['auth', 'can:client-user', 'throttle:general'])->group(functi
     Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.home');
 
 });
+
 
 // guest routes
 Route::middleware(['can:guest', 'throttle:general'])->group(function () {
@@ -133,3 +135,10 @@ Route::get('/clear-app', function () {
 
     dd("ola");
 });
+
+// Get chat ID
+Route::get('/get-updates', function () {
+    $updates = Telegram::getUpdates();
+    return $updates;
+});
+
