@@ -46,6 +46,30 @@ class TelegramService
 //        ]);
     }
 
+    // botão
+    public static function enviarInlineButton(string $mensagem, string $botaoTexto, string $url): void
+    {
+        $token = config("services.telegram.bot_token");
+        $chatId = config("services.telegram.chat_id");
+
+        Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
+            "chat_id" => $chatId,
+            "text" => $mensagem,
+            "parse_mode" => "HTML",
+
+            // ✅ Inline button
+            "reply_markup" => json_encode([
+                "inline_keyboard" => [
+                    [
+                        [
+                            "text" => $botaoTexto,
+                            "url" => $url
+                        ]
+                    ]
+                ]
+            ])
+        ]);
+    }
 
     /** Abaixo está a versão completa e profissional para enviar alertas do sistema para vários chat_id ao mesmo tempo
      * percorre todos os chat IDs
@@ -92,5 +116,6 @@ class TelegramService
             Http::post("https://api.telegram.org/bot{$token}/sendMessage", $payload);
         }
     }
+
 
 }
