@@ -99,7 +99,8 @@ Route::middleware(['can:guest', 'throttle:general'])->group(function () {
     Route::get('/', [GuestController::class, 'index'])->name('guest.home');
 
     Route::get("/buscar-produto", [GuestController::class, "buscar"])->name('produto.buscar');
-    Route::post("/buscar-produto", [GuestController::class, "buscarSubmit"])->name("produto.buscar.submit");
+    Route::post("/buscar-produto", [GuestController::class, "buscarSubmit"])
+        ->name("produto.buscar");
 
 });
 

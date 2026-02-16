@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Gestão de Usuários</title>
+    <title>{{ config('app.name') }} {!! empty($subtitle) ? '' : ' &vellip; ' . $subtitle !!}</title>
 
     {{--  FontAwesome  --}}
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">

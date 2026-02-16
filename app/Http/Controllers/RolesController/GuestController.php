@@ -26,20 +26,20 @@ class GuestController extends Controller
 
         $termo = $request->produto;
 
-        // Buscar produtos
         $produtos = GoogleShoppingService::buscarProduto("comprar $termo");
 
         if (empty($produtos)) {
             return back()->with("erro", "Nenhum produto encontrado 😢");
         }
 
-        // Lojas permitidas
+        // Lojas confiáveis
         $lojasPermitidas = [
-            "Amazon", "Magazine Luiza", "Magalu", "Mercado Livre",
-            "Americanas", "Casas Bahia", "Shopee", "KaBuM"
+            "Amazon", "Magazine Luiza", "Magalu",
+            "Mercado Livre", "Americanas",
+            "Casas Bahia", "Shopee", "KaBuM"
         ];
 
-        // Filtrar produtos confiáveis
+        // Filtrar
         $filtrados = array_filter($produtos, function ($p) use ($lojasPermitidas) {
 
             if (!isset($p["price"], $p["source"])) return false;
@@ -57,9 +57,11 @@ class GuestController extends Controller
         });
 
         $melhor = $filtrados[0];
+        $top10  = array_slice($filtrados, 0, 10);
 
-        return view("guest.buscar", compact("melhor", "termo"));
+        return view("guest.produtos.resultado", compact("melhor", "top10", "termo"));
     }
+
 
     private function limparPreco(string $precoTexto): float
     {
