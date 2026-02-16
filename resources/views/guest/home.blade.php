@@ -64,7 +64,7 @@
 
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active" href="#">Início</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ route('produto.buscar') }}">BUSCAR PRODUTO</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Política</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Esportes</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Tecnologia</a></li>
